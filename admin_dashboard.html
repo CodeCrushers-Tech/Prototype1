@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Delhi Fire Safety CoP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>District Fire Admin Dashboard</h1>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <ul>
+                <li><button id="pendingRequestsBtn">Pending Requests</button></li>
+                <li><button id="approvedRequestsBtn">Approved Requests</button></li>
+                <li><button id="rejectedRequestsBtn">Rejected Requests</button></li>
+            </ul>
+        </div>
+        <div class="content" id="contentArea">
+            <h2>Welcome, Admin</h2>
+            <p>Select a category from the left to view and manage requests.</p>
+        </div>
+    </div>
+    <!-- Pending Requests Table (Updated) -->
+<table>
+    <thead>
+        <tr>
+            <th>Application ID</th>
+            <th>Applicant Name</th>
+            <th>Building Type</th>
+            <th>Submission Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>123456</td>
+            <td>John Doe</td>
+            <td>Commercial</td>
+            <td>2024-09-10</td>
+            <td>Pending</td>
+            <td>
+                <button onclick="viewRequestDetails('123456')">View</button>
+                <button onclick="approveRequest('123456')">Approve</button>
+                <button onclick="rejectRequest('123456')">Reject</button>
+            </td>
+        </tr>
+        <!-- Add more rows dynamically from backend as needed -->
+    </tbody>
+</table>
+
+    <script>
+        // Sample data for request details (In actual implementation, this data will come from the backend)
+        const requestData = {
+            '123456': {
+                applicantName: "John Doe",
+                email: "john.doe@example.com",
+                phone: "9876543210",
+                buildingType: "Commercial",
+                buildingDocs: ["BuildingDoc.pdf"],
+                layoutPlan: ["LayoutPlan.pdf"],
+                location: "28.6139, 77.2090",
+                submissionDate: "2024-09-10"
+            }
+        };
+    
+        // Function to display the request details in the modal
+        function viewRequestDetails(applicationId) {
+            const data = requestData[applicationId]; // Fetch details from the backend in real implementation
+    
+            // Build the modal content dynamically
+            const modalContent = `
+                <p><strong>Applicant Name:</strong> ${data.applicantName}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone:</strong> ${data.phone}</p>
+                <p><strong>Building Type:</strong> ${data.buildingType}</p>
+                <p><strong>Documents:</strong> 
+                    <ul>
+                        <li><a href="${data.buildingDocs[0]}" target="_blank">Building Document</a></li>
+                        <li><a href="${data.layoutPlan[0]}" target="_blank">Layout Plan</a></li>
+                    </ul>
+                </p>
+                <p><strong>Location:</strong> ${data.location}</p>
+                <p><strong>Submission Date:</strong> ${data.submissionDate}</p>
+            `;
+    
+            // Insert the content into the modal
+            document.getElementById('requestDetails').innerHTML = modalContent;
+    
+            // Show the modal
+            document.getElementById('requestModal').style.display = "block";
+        }
+    
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById('requestModal').style.display = "none";
+        }
+    </script>
+    
+    <!-- Modal for Viewing Request Details -->
+<div id="requestModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Application Details</h2>
+        <div id="requestDetails">
+            <!-- User and building details will be displayed here dynamically -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Delhi Fire Safety CoP</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbc64rZzdV-BE4nZoNzlKw3PlkeCgVRTU"></script> <!-- Add your Google Maps API key -->
+</head>
+<body>
+    <div class="header">
+        <h1>Delhi Fire Safety CoP - User Dashboard</h1>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="sidebar">
+            <ul>
+                <li><button id="newAppBtn">New Application</button></li>
+                <li><button id="trackAppBtn">Track Application</button></li>
+                <li><button id="myAppBtn">My Applications</button></li>
+            </ul>
+        </div>
+        <div class="content" id="contentArea">
+            <h2>Welcome to your Dashboard</h2>
+            <p>Select an option from the left to proceed.</p>
+        </div>
+    </div>
+    <script>
+        // Display New Application form
+        document.getElementById('newAppBtn').addEventListener('click', function() {
+            document.getElementById('contentArea').innerHTML = `
+                <h2>New Application</h2>
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <label for="buildingType">Type of Building<span>*</span></label>
+                    <select id="buildingType" name="buildingType" required>
+                        <option value="">-Select Building Type-</option>
+                        <option value="Residential">Residential</option>
+                        <option value="Commercial">Commercial</option>
+                        <option value="Industrial">Industrial</option>
+                    </select>
+
+                    <label for="buildingDoc">Upload Building Document<span>*</span></label>
+                    <input type="file" id="buildingDoc" name="buildingDoc" accept=".pdf" required>
+
+                    <label for="buildingLayout">Upload Building Layout<span>*</span></label>
+                    <input type="file" id="buildingLayout" name="buildingLayout" accept=".pdf" required>
+
+                    <label for="map">Select Building Location on Map<span>*</span></label>
+                    <div id="map" style="width: 100%; height: 300px;"></div>
+
+                    <label for="captcha">Enter Captcha<span>*</span></label>
+                    <div class="captcha">
+                        <span>3 + 7</span>
+                        <input type="text" id="captcha" name="captcha" required>
+                    </div>
+
+                    <button type="submit" class="register">Pay & Submit</button>
+                </form>
+            `;
+            initMap(); // Call the map initialization function
+        });
+
+        // Display Track Application form
+        document.getElementById('trackAppBtn').addEventListener('click', function() {
+            document.getElementById('contentArea').innerHTML = `
+                <h2>Track Application</h2>
+                <form action="#" method="post">
+                    <label for="tokenNumber">Enter Application Token Number<span>*</span></label>
+                    <input type="text" id="tokenNumber" name="tokenNumber" required>
+                    <button type="submit" class="register">Track</button>
+                </form>
+            `;
+        });
+
+        // Display My Applications (static data for now)
+        document.getElementById('myAppBtn').addEventListener('click', function() {
+            document.getElementById('contentArea').innerHTML = `
+                <h2>My Applications</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Building Type</th>
+                            <th>Status</th>
+                            <th>Date Submitted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>123456</td>
+                            <td>Residential</td>
+                            <td>Approved</td>
+                            <td>2024-09-15</td>
+                        </tr>
+                        <tr>
+                            <td>789101</td>
+                            <td>Commercial</td>
+                            <td>Pending</td>
+                            <td>2024-09-18</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        });
+
+        // Initialize Google Map
+        function initMap() {
+            var mapOptions = {
+                center: new google.maps.LatLng(28.7041, 77.1025), // Default location (Delhi)
+                zoom: 10
+            };
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            // Add marker on click
+            google.maps.event.addListener(map, 'click', function(event) {
+                placeMarker(map, event.latLng);
+            });
+
+            function placeMarker(map, location) {
+                new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            }
+        }
+    </script>
+</body>
+</html>

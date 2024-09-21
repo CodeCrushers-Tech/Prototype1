@@ -1,0 +1,11 @@
+.forgot-password {
+    display: block;
+    margin-top: 15px;
+    text-align: center;
+    color: #ff4500;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}

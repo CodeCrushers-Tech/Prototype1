@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delhi Fire Safety CoP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Delhi Fire Safety CoP</h1>
+    </div>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <label for="name">Name<span>*</span></label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="gender">Gender<span>*</span></label>
+            <div class="gender-options">
+                <input type="radio" id="male" name="gender" value="Male" required>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="Female" required>
+                <label for="female">Female</label>
+                <input type="radio" id="other" name="gender" value="Other" required>
+                <label for="other">Other</label>
+            </div>
+
+            <label for="email">Email ID<span>*</span></label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mobile">Mobile Number<span>*</span></label>
+            <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+
+            <label for="identity">Identity Proof<span>*</span></label>
+            <select id="identity" name="identity" required>
+                <option value="">-Please Select-</option>
+                <option value="aadhaar">Aadhaar Card</option>
+                <option value="passport">Passport</option>
+                <option value="driving">Driving License</option>
+            </select>
+
+            <label for="upload">Upload Document<span>*</span></label>
+            <input type="file" id="upload" name="upload" accept=".pdf" required>
+            <small>Note: Allowed Extension: PDF & Max size: 25 MB</small>
+
+            <label for="password">Password<span>*</span></label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Confirm Password<span>*</span></label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+
+            <label for="captcha">Enter Captcha<span>*</span></label>
+            <div class="captcha">
+                <span>6 + 5</span>
+                <input type="text" id="captcha" name="captcha" required>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="register">Register</button>
+                <button type="reset" class="cancel">Cancel</button>
+            </div>
+
+            <p class="note">
+                Please provide correct mobile number and Email ID, your mobile number and Email ID will be used for future communication.
+            </p>
+        </form>
+    </div>
+
+</body>
+</html>
